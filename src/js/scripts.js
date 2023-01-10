@@ -1,14 +1,16 @@
 // Create a class called Person
 class Person {
     //Implement a greedy, partial and default constructor.
+    
     constructor()
     {
         this.firstName = "John";
+        this.middleName = "Anonymous"
         this.lastName = "Doe";
-        this.birthDate(new Date("2000-01-01"));
+        this.birthDate = new Date("2000-01-01");
         this.gender = "Male";
     }
-
+    /*
     constructor(firstName, lastName)
     {
         this.firstName = firstName;
@@ -24,7 +26,7 @@ class Person {
         this.birthDate(birthDate);
         this.gender = gender;
     }
-
+    */
 
     // with a first name, middle name, last name and gender field
     firstName;
@@ -56,12 +58,12 @@ class Person {
 
     // Derive an age property from the birth date.
     get age() {
-        return Date.now().getYear()-this.birthDate().getYear();
+        return new Date(Date.now()).getFullYear()-this.birthDate.getFullYear();
     }
 
     // Implement a toString() method that will describe the person in an English sentence.
     toString() {
-        return `A ${this.age()} year old person of the ${this.gender} gender, named ${this.fullName()}.`;
+        return `A ${this.age} year old person of the ${this.gender} gender, named ${this.fullName}.`;
     }
 
     // Implement an introduction() method that will introduce the person by the first name as an English sentence.
@@ -75,6 +77,9 @@ async function main() {
     
     let prompt = "Please enter your name, or 'Exit' to quit: "
     let name = await input(prompt);
+
+    let person = new Person();
+    output(person);
 
     while (name != "Exit") 
     {
