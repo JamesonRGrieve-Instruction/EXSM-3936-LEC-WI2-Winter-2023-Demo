@@ -1,7 +1,6 @@
 // Create a class called Person
 class Person {
     //Implement a greedy, partial and default constructor.
-    
     constructor()
     {
         this.firstName = "John";
@@ -73,19 +72,8 @@ class Person {
 }
 
 async function main() {
-    // This is where the code you're actually experimenting with goes.
-    
-    let prompt = "Please enter your name, or 'Exit' to quit: "
-    let name = await input(prompt);
-
     let person = new Person();
     output(person);
-
-    while (name != "Exit") 
-    {
-        output("Hello, "+name+"!");
-        name = await input(prompt);
-    }
 }
 
 
