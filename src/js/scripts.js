@@ -1,32 +1,15 @@
 // Create a class called Person
 class Person {
     //Implement a greedy, partial and default constructor.
-    constructor()
-    {
-        this.firstName = "John";
-        this.middleName = "Anonymous"
-        this.lastName = "Doe";
-        this.birthDate = new Date("2000-01-01");
-        this.gender = "Male";
-    }
-    /*
-    constructor(firstName, lastName)
-    {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate(new Date("2000-01-01"));
-    }
-
-    constructor(firstName, middleName, lastName, birthDate, gender)
+    constructor(firstName = "John", middleName = "Anonymous", lastName = "Doe", birthDate = new Date("2000-01-01"), gender = "Male")
     {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.birthDate(birthDate);
+        this.birthDate = birthDate;
         this.gender = gender;
     }
-    */
-
+    
     // with a first name, middle name, last name and gender field
     firstName;
     middleName;
@@ -72,8 +55,16 @@ class Person {
 }
 
 async function main() {
-    let person = new Person();
-    output(person);
+    // Any arguments not provided that are expected (by order) are assumed to be undefined.
+    // If we want to set (as shown) the first and fifth argument, we can explicitly provide undefined for the 2nd thru 4th.
+    let defaultPerson = new Person();
+    let partialPerson1 = new Person("Joey");
+    let partialPerson2 = new Person("Jane", undefined, undefined, undefined, "Female");
+    let greedyPerson = new Person("Bob", "Tom", "Smith", new Date("2005-02-03"), "Male");
+    output(defaultPerson);
+    output(partialPerson1);
+    output(partialPerson2);
+    output(greedyPerson);
 }
 
 
