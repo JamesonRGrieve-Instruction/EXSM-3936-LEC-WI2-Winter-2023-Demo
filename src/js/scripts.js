@@ -66,16 +66,18 @@ class Pet {
 
 async function main() {
     let defaultPerson = new Person();
-    let johnsPet = defaultPerson.pet;
-
-
     output(defaultPerson);
-    output(johnsPet);
+    // Stringify allows us to convert a JavaScript object into a plaintext representation thereof (JavaScript Object Notation).
+    let jsonText = JSON.stringify(defaultPerson);
+    output(jsonText, "debug");
+    // If we want to then bring that back into JavaScript, we can use Parse.
+    let parsedJSON = JSON.parse(jsonText);
 
-    johnsPet.name = "Doggo";
+    // Parse will bring the data in, but as JSON does not store methods, if we want that functionality on our import object, we will need to tell JavaScript to what class the imported object belongs.
+    let parsedPerson = Object.assign(new Person(), parsedJSON);
+    parsedPerson.pet = Object.assign(new Pet(), parsedPerson.pet);
+    output(parsedPerson);
 
-    output(defaultPerson);
-    output(johnsPet);
 }
 
 
