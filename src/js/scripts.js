@@ -66,9 +66,16 @@ class Pet {
 
 async function main() {
     let defaultPerson = new Person();
+    let johnsPet = defaultPerson.pet;
+
 
     output(defaultPerson);
-    output(defaultPerson.pet);
+    output(johnsPet);
+
+    johnsPet.name = "Doggo";
+
+    output(defaultPerson);
+    output(johnsPet);
 }
 
 
