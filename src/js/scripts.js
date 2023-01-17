@@ -80,7 +80,20 @@ class Engine {
     //The properties of the engine class should include a number of cylinders, and whether it is running or not.
     numCylinders;
     //the engine’s running property should always initialize to false
-    isRunning = false;
+    #isRunning = false;
+    get isRunning() {
+        return this.#isRunning;
+    }
+    set isRunning(incoming) {
+        if (this.#isRunning && incoming)
+        {   
+            throw new Error("Brrrrrtttt... That didn't sound good. The engine was already running!");
+        }
+        else
+        {
+            this.#isRunning = incoming;
+        }
+    }
 }
 
 //Once your class is constructed, using the browser console, create a script that will:
