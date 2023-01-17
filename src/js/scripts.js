@@ -59,6 +59,18 @@ class Car {
             throw new Error("The engine isn't running, the car isn't going to go anywhere!");
         }
     }
+
+    // This controls the output for JSON.stringify (or any other JSON serialization).
+    toJSON() {
+        return {
+            make: this.make,
+            model: this.model,
+            year: this.year,
+            // By adding this line, it forces the JSON serializer to pull the value of the property.
+            odometer: this.odometer,
+            engine: this.engine
+        };
+    }
 }
 class Engine {
     //Both classes should have their own constructors.
