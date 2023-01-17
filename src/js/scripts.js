@@ -6,13 +6,3 @@ clickMe.addEventListener("click", (e) => {
     inputField.value = "Click!";
 });
 
-// NOT SYNTACTICALLY CORRECT - DOESN'T DEFINE Y
-// PURELY FOR ILLUSTRATION
-function nameDoesntMatter (x) {
-    return y;
-}
-
-(x) => { return y; }
-
-
-(x) => y;
