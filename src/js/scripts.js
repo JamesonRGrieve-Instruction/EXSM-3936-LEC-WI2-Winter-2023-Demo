@@ -15,7 +15,27 @@ class Car {
     model;
     year;
     //The car’s odometer property should always initialize to 0
-    odometer = 0;
+    #odometer = 0;
+    get odometer()
+    {
+        return this.#odometer;
+    }
+    set odometer(incoming)
+    {
+        // If the incoming value is less than the current value...
+        if (incoming < this.#odometer)
+        {
+            throw new Error("The odometer can't roll backwards - that's illegal!");
+        }
+        else if (!(typeof incoming === "number"))
+        {
+            throw new Error("The odometer must be a number!");
+        }
+        else
+        {
+            this.#odometer = incoming;
+        } 
+    }
     //The engine property will be an instance of the engine class.
     engine;
 
