@@ -3,12 +3,13 @@
 class Car {
     //Both classes should have their own constructors.
     //Other properties should be passed in through constructor parameters.
-    constructor(make = "Dodge", model = "Stealth", year = 1992, engineNumCylinders = 6) {
+    constructor(make = "Dodge", model = "Stealth", year = 1992, engineNumCylinders = 6, transmissionType = "Manual", transmissionNumGears = 6) {
         this.make = make;
         this.model = model;
         this.year = year;
         //The constructor of the car should instantiate an engine for the car. 
         this.engine = new Engine(engineNumCylinders);
+        this.transmission = new Transmission(transmissionType, transmissionNumGears);
     }
     //The properties of the car class should include its make, model, year, odometer and engine.
     make;
@@ -38,6 +39,7 @@ class Car {
     }
     //The engine property will be an instance of the engine class.
     engine;
+    transmission;
 
     //The methods of the car class should include a method to start the car engine (no parameters) which will set the engine to running,
     startEngine() {
@@ -94,6 +96,15 @@ class Engine {
             this.#isRunning = incoming;
         }
     }
+}
+class Transmission {
+    constructor(type = "Manual", numGears = 4)
+    {
+        this.type = type;
+        this.numGears = numGears;
+    }
+    type;
+    numGears;
 }
 
 //Once your class is constructed, using the browser console, create a script that will:
