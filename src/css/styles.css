@@ -1,0 +1,10 @@
+header, main {
+    width: 1200px;
+    margin: 0 auto;
+}
+main img {
+    max-width: 200px;
+    border: 3px solid black;
+    border-radius: 5px;
+    margin: 5px;
+}
