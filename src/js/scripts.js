@@ -1,13 +1,7 @@
-// Build an array of all of the buttons.
-const buttons = document.querySelectorAll("main button");
-const addButton = document.querySelector("header button");
 // For each of them, add the event listener.
-for (button of buttons)
-{
-    button.addEventListener("click", deleteSelf);
-}
+for (button of document.querySelectorAll("main button")) button.addEventListener("click", deleteSelf);
 
-addButton.addEventListener("click", () => {
+document.querySelector("header button").addEventListener("click", () => {
     const newButton = document.createElement("button");
     newButton.innerText = "Remove Me!";
     newButton.addEventListener("click", deleteSelf);
