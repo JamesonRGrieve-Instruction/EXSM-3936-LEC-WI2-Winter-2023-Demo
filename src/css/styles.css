@@ -1,0 +1,18 @@
+body {
+    background-color: rgb(179, 217, 228);
+}
+main, header {
+    max-width: 768px;
+    margin: 0 auto;
+    text-align: center;
+}
+button {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: lavender;
+}
+button:hover {
+    background-color: palevioletred;
+}
