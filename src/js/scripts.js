@@ -43,6 +43,11 @@ document.querySelector("#clear").addEventListener("click", (e) => {
     e.preventDefault();
     // Remove everything inside the unordered list.
     toDoList.innerHTML = "";
+
+    // If you want to remove the children programatically, you can do this instead:
+    // (While there are still children, remove the first child)
+    // while (toDoList.children.length > 0) toDoList.children[0].remove();
+
     // Clear the input.
     toDoInput.value = "";
 });
