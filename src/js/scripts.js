@@ -24,10 +24,20 @@ addButton.addEventListener("click", (event) => {
     };
     // Append the image with the src, title and alt attributes set.
     newImageContainer.appendChild(Object.assign(document.createElement("img"), {src: newImageObj.url, title:newImageObj.description, alt: newImageObj.description}));
+
+    // Alternative to Object.assign():
+    /*
+    const newImage = document.createElement("img");
+    newImage.src = newImageObj.url;
+    newImage.title = newImageObj.description;
+    newImage.alt = newImageObj.description;
+    newImageContainer.appendChild(newImage);
+    */
+
     // Append the description with the inner text set.
     newImageContainer.appendChild(Object.assign(document.createElement("p"), {innerText: newImageObj.description}));
     // Create the span to house the tag links.
-    newImageTagsContainer = document.createElement("span");
+    const newImageTagsContainer = document.createElement("span");
     // For each tag stored in the tags field of the object, create a new tag link.
     for (tag of newImageObj.tags)
     {
