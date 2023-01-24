@@ -11,9 +11,9 @@ document.querySelector("#submit").addEventListener("click", (e) => {
     {
         // Generate our new item.
         const newToDoItem = document.createElement("li");
-        // Create the checkbox.
-        const newToDoCheckbox = document.createElement("input");
-        newToDoCheckbox.setAttribute("type", "checkbox");
+        // Create the checkbox. Assign the type attribute to "checkbox".
+        const newToDoCheckbox = Object.assign(document.createElement("input"), {type: "checkbox"});
+
         // When the checkbox is clicked, remove the list item.
         newToDoCheckbox.addEventListener("click", (e) => {
             newToDoItem.remove();
