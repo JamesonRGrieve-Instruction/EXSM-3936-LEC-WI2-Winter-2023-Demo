@@ -2,7 +2,7 @@ const toDoList = document.querySelector("main>section>ul");
 const toDoInput = document.querySelector("main>form>input");
 
 // When the 'Submit' button is clicked:
-document.querySelector("main>form>button").addEventListener("click", (e) => {
+document.querySelector("#submit").addEventListener("click", (e) => {
     // Because our button is inside a form, clicking the button will submit the form by default, refreshing the page.
     // To avoid that, we can take our event argument and prevent the default behaviour (the submission).
     e.preventDefault();
@@ -14,6 +14,12 @@ document.querySelector("main>form>button").addEventListener("click", (e) => {
         // Create the checkbox.
         const newToDoCheckbox = document.createElement("input");
         newToDoCheckbox.setAttribute("type", "checkbox");
+        // When the checkbox is clicked, remove the list item.
+        newToDoCheckbox.addEventListener("click", (e) => {
+            newToDoItem.remove();
+            // Rather than using parentElement or parentNode, we can use newToDoItem since it's already a reference to the list item.
+            // newToDoCheckbox.parentElement.remove();
+        });
         // Add the checkbox to the item.
         newToDoItem.appendChild(newToDoCheckbox);
 
@@ -28,6 +34,15 @@ document.querySelector("main>form>button").addEventListener("click", (e) => {
 
         toDoList.appendChild(newToDoItem);
     }
+    // Clear the input.
+    toDoInput.value = "";
+});
 
+// When the 'Clear' button is clicked:
+document.querySelector("#clear").addEventListener("click", (e) => {
+    e.preventDefault();
+    // Remove everything inside the unordered list.
+    toDoList.innerHTML = "";
+    // Clear the input.
     toDoInput.value = "";
 });
