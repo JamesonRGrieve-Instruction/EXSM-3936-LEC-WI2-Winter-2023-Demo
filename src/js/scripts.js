@@ -26,8 +26,7 @@ document.querySelector("#submit").addEventListener("click", (e) => {
         // At this point, we should have this:
         // <li><input type="checkbox" /></li>
 
-        const newToDoItemText = document.createTextNode(toDoInput.value);
-        newToDoItem.appendChild(newToDoItemText);
+        newToDoItem.appendChild(document.createTextNode(toDoInput.value));
 
         // At this point, we should have this:
         // <li><input type="checkbox" />$INPUT_TEXT</li>
