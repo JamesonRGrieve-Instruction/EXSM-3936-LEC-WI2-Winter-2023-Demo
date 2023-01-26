@@ -41,7 +41,14 @@ addButton.addEventListener("click", (event) => {
     // For each tag stored in the tags field of the object, create a new tag link.
     for (tag of newImageObj.tags)
     {
-        newImageTagsContainer.appendChild(Object.assign(document.createElement("a"), {innerText: `#${tag}`, href:"#"}));
+        const newTag = Object.assign(document.createElement("a"), {innerText: `#${tag}`, href:"#"});
+        newTag.addEventListener("click", (e) => {
+            // Pull the hashtag off and set the search term.
+            searchField.value = e.target.innerText.slice(1);
+            // Force the search to occur.
+            filterPage(searchField.value);
+        });
+        newImageTagsContainer.appendChild(newTag);
     }
     // Add the tag link container span to the div.
     newImageContainer.appendChild(newImageTagsContainer);
@@ -66,3 +73,26 @@ addButton.addEventListener("click", (event) => {
     // Add the div to the page.
     document.querySelector("main").appendChild(newImageContainer);
 });
+// Whenever the text in the input field is modified by keyboard input.
+// We still have to fire this manually if we change the value directly.
+searchField.addEventListener("input", (e) => {
+    filterPage(e.target.value);
+});
+
+function filterPage(text) {
+    // Create a copy of the images array including only images where the text is in the description or the tags.
+    for (storedImage of images) {
+        // If the image is included in the search term...
+        if (storedImage.description.includes(text) || storedImage.tags.some(y => y.includes(text)))
+        {
+            // Unhide it.
+            storedImage.renderedImage.classList.remove("hidden");
+        }
+        else
+        {
+            // Hide it.
+            storedImage.renderedImage.classList.add("hidden");
+        }
+    }
+    
+}
