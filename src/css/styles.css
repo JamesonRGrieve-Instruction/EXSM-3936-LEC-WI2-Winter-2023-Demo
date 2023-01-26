@@ -25,11 +25,11 @@ form {
     margin-top: 5px;
 }
 form > button {
-    width: 9%;
+    width: 7%;
     margin-left: 1%;
 }
 form > input {
-    width: 90%;
+    width: 84%;
 }
 form > button, form > input {
     border-radius: 10px;

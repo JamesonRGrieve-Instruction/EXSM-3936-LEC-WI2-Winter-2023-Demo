@@ -1,5 +1,6 @@
 const messageBox = document.querySelector("#history");
 const inputBox = document.querySelector("#message");
+const timeouts = [];
 
 document.querySelector("#send").addEventListener("click", sendMessage);
 // Most web events tied to keys use keydown instead of keyup.
@@ -15,15 +16,21 @@ window.addEventListener("keydown", (e) => {
             break;
     }
 });
+document.querySelector("#clear").addEventListener("click", (e) => {
+    e.preventDefault();
+    messageBox.innerHTML = "";
+    inputBox.value = "";
+    for (timeout of timeouts) clearTimeout(timeout);
+});
 
 function sendMessage(event)
 {
     event.preventDefault();
     postMessage("You", inputBox.value);
     inputBox.value = "";
-    setTimeout(() => {
+    timeouts.push(setTimeout(() => {
         postMessage();
-    }, genTimeout());
+    }, genTimeout()));
 }
 function genTimeout(min = 10, max = 30)
 {
