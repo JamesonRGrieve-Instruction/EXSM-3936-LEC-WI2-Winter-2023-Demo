@@ -1,5 +1,10 @@
 class Vehicle {
     constructor(manufacturer = "Ford", model = "Mustang", colour = "Blue", engineDisplacement = 3000) {
+        // When we implement an abstract class, because sub-classes FORCE US to call the super constructor, we must verify whether the calling class is this (abstract) one, or a sub-class. We only throw the error if it is this (abstract) one.
+        if (this.constructor == Vehicle)
+        {
+            throw new Error("Abstract classes cannot be instantiated!");
+        }
         this.manufacturer = manufacturer;
         this.model = model;
         this.colour = colour;
@@ -10,13 +15,16 @@ class Vehicle {
     model;
     colour;
 
+    // As abstract functionality isn't "baked into" JavaScript like it is some languages, we work around it to achieve similar functionality.
+    // If these methods / properties are called in a sub-class without being overridden/hidden, they will throw an error.
+    // Because THIS CLASS is abstract, we don't have to worry about an instance of this class calling these, as that cannot exist.
     get effectivePowerRating()
     {
-        return (this.engineDisplacement/10000)*100;
+        throw new Error("Abstract property was not implemented!");
     }
 
     toString() {
-        return `[Power: ${this.effectivePowerRating}] A ${this.colour} ${this.manufacturer} ${this.model} with a ${this.engineDisplacement}cc engine.`;
+        throw new Error("Abstract method was not implemented!");
     }
 }
 // If we put nothing in the children, by default they are 1-for-1 reimplementations of the parent.
@@ -32,6 +40,10 @@ class Car extends Vehicle {
     get effectivePowerRating()
     {
         return ((this.engineDisplacement/10000)*120)/2*this.poweredWheels;
+    }
+
+    toString() {
+        return `[Power: ${this.effectivePowerRating}] This is a car, a ${this.colour} ${this.manufacturer} ${this.model} with a ${this.engineDisplacement}cc engine.`;
     }
 }
 class Truck extends Vehicle {
@@ -53,10 +65,16 @@ class Truck extends Vehicle {
     }
     bedLength;
 
+    get effectivePowerRating()
+    {
+        return (this.engineDisplacement/10000)*100;
+    }
+
     // JavaScript's definitions here are a little muddy - this is either an override or a hiding of the parent implementation. 
     // Arguably it is MORE of an override if you reference the super implementation and MORE of a hiding if you do not, but either term will typically be understood.
+    // Calling super to an abstract method or property will throw the not implemented exception, as that's the entire body of the parent definition. Only call super to things that are not abstract (including non-abstract properties / method in abstract classes).
     toString() {
-        return super.toString()+` It has a bed length of ${this.bedLength}.`;
+        return `[Power: ${this.effectivePowerRating}] This is a car, a ${this.colour} ${this.manufacturer} ${this.model} with a ${this.engineDisplacement}cc engine. It has a bed length of ${this.bedLength}.`;
     }
 }
 class Motorcycle extends Vehicle {
@@ -85,6 +103,9 @@ async function main() {
 
     const myVehicles = [myCar, myTruck, myMotorcycle];
     output(myVehicles.map(x => x.effectivePowerRating));
+
+    // Throws an error, as abstract classes cannot be instantiated.
+    //const myVehicle = new Vehicle();
 }
 
 
