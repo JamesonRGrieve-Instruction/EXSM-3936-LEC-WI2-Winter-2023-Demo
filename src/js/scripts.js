@@ -74,21 +74,27 @@ class Truck extends Vehicle {
     // Arguably it is MORE of an override if you reference the super implementation and MORE of a hiding if you do not, but either term will typically be understood.
     // Calling super to an abstract method or property will throw the not implemented exception, as that's the entire body of the parent definition. Only call super to things that are not abstract (including non-abstract properties / method in abstract classes).
     toString() {
-        return `[Power: ${this.effectivePowerRating}] This is a car, a ${this.colour} ${this.manufacturer} ${this.model} with a ${this.engineDisplacement}cc engine. It has a bed length of ${this.bedLength}.`;
+        return `[Power: ${this.effectivePowerRating}] This is a truck, a ${this.colour} ${this.manufacturer} ${this.model} with a ${this.engineDisplacement}cc engine. It has a bed length of ${this.bedLength}.`;
     }
 }
 class Motorcycle extends Vehicle {
-    constructor(manufacturer = "Harley Davidson", model = "Sprint", colour = "Red", engineDisplacement = 300) {
+    constructor(manufacturer = "Harley Davidson", model = "Sprint", colour = "Red", engineDisplacement = 300, length = 6) {
         super(manufacturer, model, colour, engineDisplacement);
+        this.length = length;
     }
+    length;
 
     get effectivePowerRating()
     {
         return (this.engineDisplacement/10000)*400;
     }
+    truckToHaul()
+    {
+        return new Truck("Dodge", "Ram 1500", "Purple", this.length);
+    }
 
     toString() {
-        return `[Power: ${this.effectivePowerRating}] A ${this.engineDisplacement}cc Motorcycle built by ${this.manufacturer} sold under the name ${this.model} in the colour ${this.colour}.`;
+        return `[Power: ${this.effectivePowerRating}] A ${this.engineDisplacement}cc Motorcycle that is ${this.length} feet long, built by ${this.manufacturer} sold under the name ${this.model} in the colour ${this.colour}.`;
     }
 }
 
@@ -96,10 +102,12 @@ async function main() {
     const myCar = new Car("Dodge", "Stealth", "Blue", 3000, 4);
     const myTruck = new Truck();
     const myMotorcycle = new Motorcycle();
+    myMotorcycle.length = 8;
 
     output(myCar.toString());
     output(myTruck.toString());
     output(myMotorcycle.toString());
+    output(`I'm going to haul the above motorcycle with: ${myMotorcycle.truckToHaul()}`);
 
     const myVehicles = [myCar, myTruck, myMotorcycle];
     output(myVehicles.map(x => x.effectivePowerRating));
