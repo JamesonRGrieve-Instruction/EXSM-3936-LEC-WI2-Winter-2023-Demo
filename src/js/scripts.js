@@ -1,4 +1,5 @@
-const toDoList = document.querySelector("main>section>ul");
+const toDoListPending = document.querySelector("#pending>ul");
+const toDoListCompleted = document.querySelector("#completed>ul");
 const toDoInput = document.querySelector("main>form>input");
 
 // When the 'Submit' button is clicked:
@@ -16,7 +17,9 @@ document.querySelector("#submit").addEventListener("click", (e) => {
 
         // When the checkbox is clicked, remove the list item.
         newToDoCheckbox.addEventListener("click", (e) => {
-            newToDoItem.remove();
+            // If the target's parent's parent is the pending list, append it to the completed list and vice-versa.
+            // This works because an element can only be in one place at a time, so re-appending implicitly removes it from the original location.
+            (e.target.parentElement.parentElement===toDoListPending?toDoListCompleted:toDoListPending).appendChild(e.target.parentElement);
             // Rather than using parentElement or parentNode, we can use newToDoItem since it's already a reference to the list item.
             // newToDoCheckbox.parentElement.remove();
         });
@@ -31,7 +34,7 @@ document.querySelector("#submit").addEventListener("click", (e) => {
         // At this point, we should have this:
         // <li><input type="checkbox" />$INPUT_TEXT</li>
 
-        toDoList.appendChild(newToDoItem);
+        toDoListPending.appendChild(newToDoItem);
     }
     // Clear the input.
     toDoInput.value = "";
@@ -41,7 +44,7 @@ document.querySelector("#submit").addEventListener("click", (e) => {
 document.querySelector("#clear").addEventListener("click", (e) => {
     e.preventDefault();
     // Remove everything inside the unordered list.
-    toDoList.innerHTML = "";
+    toDoListCompleted.innerHTML = "";
 
     // If you want to remove the children programatically, you can do this instead:
     // (While there are still children, remove the first child)
