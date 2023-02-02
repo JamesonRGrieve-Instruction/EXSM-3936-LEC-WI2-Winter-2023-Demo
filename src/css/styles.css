@@ -2,9 +2,29 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
+body {
+    background-color: rgb(184, 184, 184);
+}
 ul {
     list-style: none;
 }
 li>input {
     margin: 0 10px 0 0;
+}
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+button {
+    position: relative;
+    top: 2px;
+    margin: 5px;
+    padding: 8px;
+    background-color: rgb(93, 201, 201);
+    border-radius: 4px;
+    font-weight: bold;
+}
+input[type=text], button {
+    height: 2rem;
+
 }
