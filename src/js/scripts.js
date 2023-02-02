@@ -7,9 +7,7 @@ document.querySelector("#submit").addEventListener("click", (e) => {
     // Because our button is inside a form, clicking the button will submit the form by default, refreshing the page.
     // To avoid that, we can take our event argument and prevent the default behaviour (the submission).
     e.preventDefault();
-
     generateToDo(toDoInput.value);
-
     // Clear the input.
     toDoInput.value = "";
 });
@@ -17,24 +15,17 @@ document.querySelector("#submit").addEventListener("click", (e) => {
 function generateToDo(content) {
     if (content.trim() !== "")
     {
-        // Generate our new item.
-        const newToDoItem = document.createElement("li");
-        // Create the checkbox. Assign the type attribute to "checkbox".
         const newToDoCheckbox = Object.assign(document.createElement("input"), {type: "checkbox"});
         const textContent = document.createTextNode(content);
-        
-        // When the checkbox is clicked, remove the list item.
+        const newToDoEditInput = document.createElement("input");
+        const newToDoEditButton = Object.assign(document.createElement("button"), {innerText: "Edit"});
+        const newToDoSaveButton = Object.assign(document.createElement("button"), {innerText: "Save"});
+        const newToDoCopyButton = Object.assign(document.createElement("button"), {innerText: "Copy"});
         newToDoCheckbox.addEventListener("click", (e) => {
             // If the target's parent's parent is the pending list, append it to the completed list and vice-versa.
             // This works because an element can only be in one place at a time, so re-appending implicitly removes it from the original location.
             (e.target.parentElement.parentElement===toDoListPending?toDoListCompleted:toDoListPending).appendChild(e.target.parentElement);
-            // Rather than using parentElement or parentNode, we can use newToDoItem since it's already a reference to the list item.
-            // newToDoCheckbox.parentElement.remove();
         });
-
-        const newToDoEditButton = Object.assign(document.createElement("button"), {innerText: "Edit"});
-        const newToDoSaveButton = Object.assign(document.createElement("button"), {innerText: "Save"});
-        const newToDoEditInput = document.createElement("input");
         newToDoSaveButton.addEventListener("click", (e) => {
             textContent.textContent = newToDoEditInput.value;
             newToDoEditInput.replaceWith(textContent);
@@ -45,25 +36,12 @@ function generateToDo(content) {
             textContent.replaceWith(newToDoEditInput);
             newToDoEditButton.replaceWith(newToDoSaveButton);
         });
-
-        const newToDoCopyButton = Object.assign(document.createElement("button"), {innerText: "Copy"});
         newToDoCopyButton.addEventListener("click", (e) => {
             generateToDo(textContent.textContent);
         });
 
-        // Add the checkbox to the item.
-        newToDoItem.appendChild(newToDoCheckbox);
-
-        // At this point, we should have this:
-        // <li><input type="checkbox" /></li>
-
-        newToDoItem.appendChild(textContent);
-
-        newToDoItem.appendChild(newToDoEditButton);
-        newToDoItem.appendChild(newToDoCopyButton);
-        // At this point, we should have this:
-        // <li><input type="checkbox" />$INPUT_TEXT</li>
-
+        const newToDoItem = document.createElement("li");
+        newToDoItem.append(newToDoCheckbox, textContent, newToDoEditButton, newToDoCopyButton);
         toDoListPending.appendChild(newToDoItem);
     }
 }
