@@ -48,7 +48,7 @@ function generateToDo(content) {
 
         const newToDoCopyButton = Object.assign(document.createElement("button"), {innerText: "Copy"});
         newToDoCopyButton.addEventListener("click", (e) => {
-            generateToDo(content);
+            generateToDo(textContent.textContent);
         });
 
         // Add the checkbox to the item.
