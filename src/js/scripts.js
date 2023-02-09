@@ -93,9 +93,7 @@ async function getInputNumber(prompt) {
 }
 // Takes in a number and a number of decimal places, and rounds that number to said number of decimal places.
 function roundToPlaces(number, places) {
-    let movedDecimal = number * 10 ** places;
-    let rounded = Math.round(movedDecimal);
-    return rounded / 10 ** places;
+    return Math.round(number * 10 ** places) / 10 ** places;
 }
 function displayMenu() {
     output("1. Rectangle");
@@ -112,23 +110,15 @@ async function main() {
         userMenuChoice = await getInputNumber("Please make a selection: ");
         if (userMenuChoice == 1)
         {
-            let length = await getInputNumber("Please enter a length for the Rectangle: ");
-            let width = await getInputNumber("Please enter a width for the Rectangle: ");
-            const newRectangle = new Rectangle(length, width);
-            shapesArray.push(newRectangle);
+            shapesArray.push(new Rectangle(await getInputNumber("Please enter a length for the Rectangle: "), await getInputNumber("Please enter a width for the Rectangle: ")));
         }
         else if (userMenuChoice == 2)
         {
-            let base = await getInputNumber("Please enter a base for the Triangle: ");
-            let height = await getInputNumber("Please enter a height for the Triangle: ");
-            const newTriangle = new Triangle(base, height);
-            shapesArray.push(newTriangle);
+            shapesArray.push(new Triangle(await getInputNumber("Please enter a base for the Triangle: "), await getInputNumber("Please enter a height for the Triangle: ")));
         } 
         else if (userMenuChoice == 3)
         {
-            let radius = await getInputNumber("Please enter a radius for the Circle: ");
-            const newCircle = new Triangle(radius);
-            shapesArray.push(newCircle);
+            shapesArray.push(new Circle(await getInputNumber("Please enter a radius for the Circle: ")));
         }
         else
         {
