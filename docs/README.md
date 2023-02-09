@@ -1,4 +1,4 @@
-# University of Alberta Demo Repository
+# University of Alberta Template Repository
 ## Full Stack Web Application Development Program
 
-Use the branch selector to view the demos for different weeks.
+Add your README content here.
