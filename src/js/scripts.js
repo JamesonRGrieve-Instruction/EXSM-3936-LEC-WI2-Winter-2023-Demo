@@ -79,8 +79,77 @@ class Circle extends Shape {
         return new Rectangle(this.diameter, this.diameter);
     }
 }
+// Takes in a prompt, displays it to the user, continues to prompt until valid number entered.
+async function getInputNumber(prompt) {
+    let toReturn = NaN;
+    do {
+        toReturn = Number(await input(prompt));
+        if (isNaN(toReturn)) 
+        {
+            output("You did not enter a valid number. Please try again.");
+        } 
+    } while (isNaN(toReturn));
+    return toReturn;
+}
+// Takes in a number and a number of decimal places, and rounds that number to said number of decimal places.
+function roundToPlaces(number, places) {
+    let movedDecimal = number * 10 ** places;
+    let rounded = Math.round(movedDecimal);
+    return rounded / 10 ** places;
+}
+function displayMenu() {
+    output("1. Rectangle");
+    output("2. Triangle");
+    output("3. Circle");
+    output("0. Exit");
+}
 async function main() {
-
+    output("Welcome to the Geometry Program!")
+    let userMenuChoice;
+    const shapesArray = [];
+    do {
+        displayMenu();
+        userMenuChoice = await getInputNumber("Please make a selection: ");
+        if (userMenuChoice == 1)
+        {
+            let length = await getInputNumber("Please enter a length for the Rectangle: ");
+            let width = await getInputNumber("Please enter a width for the Rectangle: ");
+            const newRectangle = new Rectangle(length, width);
+            shapesArray.push(newRectangle);
+        }
+        else if (userMenuChoice == 2)
+        {
+            let base = await getInputNumber("Please enter a base for the Triangle: ");
+            let height = await getInputNumber("Please enter a height for the Triangle: ");
+            const newTriangle = new Triangle(base, height);
+            shapesArray.push(newTriangle);
+        } 
+        else if (userMenuChoice == 3)
+        {
+            let radius = await getInputNumber("Please enter a radius for the Circle: ");
+            const newCircle = new Triangle(radius);
+            shapesArray.push(newCircle);
+        }
+        else
+        {
+            output("Please ensure you make a selection from the menu.");
+        }
+        if ([1, 2, 3].includes(userMenuChoice)) 
+        {
+            let totalPerimeter = 0;
+            let totalArea = 0;
+            let totalContainsArea = 0;
+            for (shape of shapesArray)
+            {
+                totalPerimeter += shape.perimeter;
+                totalArea += shape.area;
+                totalContainsArea += shape.contain().area;
+            }
+            output(`The total perimeter of all ${shapesArray.length} shapes is ${roundToPlaces(totalPerimeter, 2)} units.`);
+            output(`The total area of all ${shapesArray.length} shapes is ${roundToPlaces(totalArea, 2)} units squared.`);
+            output(`The total area of squares containing all ${shapesArray.length} shapes is ${roundToPlaces(totalContainsArea, 2)} units squared.`);
+        }
+    } while (userMenuChoice != 0);
 }
 
 
