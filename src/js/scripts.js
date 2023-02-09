@@ -35,7 +35,7 @@ class Rectangle extends Shape {
         return (this.length + this.width) * 2;
     }
     contain() {
-
+        return new Rectangle(Math.max(this.length, this.width), Math.max(this.length, this.width));
     }
 }
 class Triangle extends Shape {
@@ -54,7 +54,7 @@ class Triangle extends Shape {
         return hypotenuse * 2 + this.base;
     }
     contain() {
-
+        return new Rectangle(Math.max(this.base, this.height), Math.max(this.base, this.height));
     }
 }
 class Circle extends Shape {
@@ -76,7 +76,7 @@ class Circle extends Shape {
         return this.circumference;
     }
     contain() {
-
+        return new Rectangle(this.diameter, this.diameter);
     }
 }
 async function main() {
