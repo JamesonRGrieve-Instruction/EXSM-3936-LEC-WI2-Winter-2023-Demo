@@ -28,6 +28,11 @@ class Rectangle extends Shape {
     }
     length;
     width;
+    get isSquare() 
+    {
+        return this.length == this.width;
+    }
+
 }
 class Triangle extends Shape {
     constructor(base = 3, height = 5, colour = "blue")
@@ -46,6 +51,12 @@ class Circle extends Shape {
         this.radius = radius;
     }
     radius;
+    get diameter() {
+        return radius*2;
+    }
+    get circumference() {
+        return Math.PI * this.diameter;
+    }
 }
 async function main() {
 
