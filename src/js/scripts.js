@@ -1,8 +1,12 @@
+let shownJoke;
+
 document.querySelector("button").addEventListener("click", (e) => { 
+    if (shownJoke != null) shownJoke.remove();
     fetch("https://v2.jokeapi.dev/joke/Programming?safe-mode")
         .then(response => response.json())
         .then(json => {
             const jokeContainer = document.createElement("div");
+            shownJoke = jokeContainer;
             const joke = document.createElement("p");
             jokeContainer.appendChild(joke);
             if (json.type == "single")
