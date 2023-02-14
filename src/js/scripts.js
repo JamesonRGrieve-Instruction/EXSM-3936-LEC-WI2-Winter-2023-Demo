@@ -69,6 +69,7 @@ addButton.addEventListener("click", (event) => {
 
     // Add the object to the array.
     images.push(newImageObj);
+    localStorage.setItem("exsm3936_images", JSON.stringify(images));
 
     // Add the div to the page.
     document.querySelector("main").appendChild(newImageContainer);
